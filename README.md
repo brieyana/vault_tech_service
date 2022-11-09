@@ -2,7 +2,7 @@
 
 API for the Vault Tech application.
 
-**Note**: Before attempting to start the server, please refer to Phoenix's installation guide to ensure you have correct dependencies installed. Vault Tech Service uses the default relational database server, PostgreSQL.
+**Note**: Before attempting to start the server, please refer to [Phoenix's installation guide](https://hexdocs.pm/phoenix/installation.html) to ensure you have correct dependencies installed. Vault Tech Service uses the default relational database server, PostgreSQL.
 
 To start the server:
   * Install dependencies with `mix deps.get`
@@ -36,11 +36,11 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
    `password=[string]`
 
 * **Success Response:**
-  *  **Code:** 201 `(CREATED)` <br />
+  *  **Code:** 201 CREATED <br />
   *  **Content:** `{ id: 1, username: "janedoe", email: "jane@gmail.com", first_name: "jane", last_name: "doe"  }`
  
 * **Error Response:**
-  * **Code:** 400 `(BAD REQUEST)` <br />
+  * **Code:** 400 BAD REQUEST <br />
   *  **Content:** `{ error: { status: 400, message: "cannot create account" } }`
 
 * **Sample Call:**
