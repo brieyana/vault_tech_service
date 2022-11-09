@@ -1,4 +1,3 @@
-# renders how the response will be shown
 defmodule VaultTechServiceWeb.UserView do
   use VaultTechServiceWeb, :view
 

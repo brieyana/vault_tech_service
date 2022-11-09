@@ -14,8 +14,6 @@ defmodule ServiceWeb.User do
   end
 
   # validation to insert user into database
-  # CHANGESET: validates whether or not to CHANGE the
-  # empty USER OBJECT!
   def changeset(user, params \\ %{}) do
     keys = [:username, :password, :email, :first_name, :last_name]
 

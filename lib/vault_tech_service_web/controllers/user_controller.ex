@@ -15,7 +15,6 @@ defmodule VaultTechServiceWeb.UserController do
     })
   )
 
-  # create user account
   def create(conn, params) do
     changeset = User.changeset(%User{}, params)
     result = Users.create_user_account(changeset)
@@ -40,14 +39,12 @@ defmodule VaultTechServiceWeb.UserController do
     end
   end
 
-  # error response
   defp render_error(conn, status, message) do
     conn
     |> Plug.Conn.put_status(status)
     |> render("error.json", error: %{status: status, message: message})
   end
 
-  # successful response
   defp render_success(conn, status, user) do
     conn
     |> Plug.Conn.put_status(status)
