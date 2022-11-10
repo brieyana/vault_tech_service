@@ -14,8 +14,8 @@ defmodule VaultTechServiceWeb.UserView do
   def render("error.json", %{error: error}) do
     %{
       error: %{
-        status: Plug.Conn.Status.code(error.status),
-        message: error.message
+        reason: error.reason,
+        status: Plug.Conn.Status.code(error.status)
       }
     }
   end

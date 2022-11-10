@@ -52,6 +52,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
       first_name: "Jane",
       last_name: "Doe",
       username: "janedoe",
-      password: "password"
+      password: "password12345"
     });
   ```

@@ -24,8 +24,8 @@ defmodule ServiceWeb.User do
     |> validate_username(:username)
     |> validate_format(:email, ~r/^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
     |> validate_length(:password, min: 12, max: 18)
-    |> validate_length(:first_name, min: 1)
-    |> validate_length(:last_name, min: 1)
+    |> validate_length(:first_name, max: 30)
+    |> validate_length(:last_name, max: 30)
   end
 
   defp validate_username(changeset, :username) do

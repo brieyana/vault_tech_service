@@ -1,7 +1,10 @@
 defmodule VaultTechServiceWeb.UserController do
   use VaultTechServiceWeb, :controller
+
   alias VaultTechServiceWeb.Storage.Users
   alias VaultTechServiceWeb.User
+  import Ecto.Changeset
+  import Plug.Conn
 
   use Params
 
@@ -16,16 +19,25 @@ defmodule VaultTechServiceWeb.UserController do
   )
 
   def create(conn, params) do
-    changeset = User.changeset(%User{}, params)
-    result = Users.create_user_account(changeset)
+    changeset =
+      User.changeset(%User{}, params)
+      |> Users.create_user_account()
 
-    case result do
+    case changeset do
       {:ok, user} ->
         render_success(conn, :created, user)
 
-      # TO DO: render changeset errors (fallback controller)
-      {:error, _result} ->
-        render_error(conn, :bad_request, "cannot create account")
+      {:error, changeset} ->
+        errors =
+          traverse_errors(changeset, fn {msg, opts} ->
+            Regex.replace(~r"%{(\w+)}", msg, fn _, key ->
+              opts
+              |> Keyword.get(String.to_existing_atom(key), key)
+              |> to_string()
+            end)
+          end)
+
+        render_error(conn, :bad_request, errors)
     end
   end
 
@@ -39,15 +51,15 @@ defmodule VaultTechServiceWeb.UserController do
     end
   end
 
-  defp render_error(conn, status, message) do
+  defp render_error(conn, status, reason) do
     conn
-    |> Plug.Conn.put_status(status)
-    |> render("error.json", error: %{status: status, message: message})
+    |> put_status(status)
+    |> render("error.json", error: %{status: status, reason: reason})
   end
 
   defp render_success(conn, status, user) do
     conn
-    |> Plug.Conn.put_status(status)
+    |> put_status(status)
     |> render("user.json", user: user)
   end
 end
