@@ -11,6 +11,7 @@ defmodule ServiceWeb.User do
     field :first_name, :string
     field :last_name, :string
     field :password, :string
+    has_many :cards, VaultTechServiceWeb.Card
   end
 
   # validation to insert user into database
